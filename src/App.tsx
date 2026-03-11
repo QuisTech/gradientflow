@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { DirectorMode } from './components/DirectorMode/DirectorMode';
 import { 
   LayoutDashboard, 
   Cpu, 
@@ -103,6 +104,7 @@ export default function App() {
   ]);
   const [chatInput, setChatInput] = useState('');
   const [isChatting, setIsChatting] = useState(false);
+  const [directorMode, setDirectorMode] = useState(false);
 
   useEffect(() => {
     fetch('/api/jobs')
@@ -203,9 +205,9 @@ export default function App() {
               <Terminal className="w-4 h-4" />
               CLI Access
             </button>
-            <button className="bg-brand-accent text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-brand-accent/20">
-              <Plus className="w-4 h-4" />
-              New Deployment
+            <button onClick={() => setDirectorMode(true)} className="bg-brand-accent text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-brand-accent/20">
+              <Play className="w-4 h-4 fill-current" />
+              Director Demo
             </button>
           </div>
         </div>
@@ -310,12 +312,14 @@ export default function App() {
             
             <div className="flex-1 flex flex-col gap-4">
               <textarea 
+                id="architect-input"
                 value={architectInput}
                 onChange={(e) => setArchitectInput(e.target.value)}
                 placeholder="e.g., I need to train a real-time object detection model for autonomous drones..."
                 className="flex-1 bg-brand-bg border border-brand-border rounded-xl p-4 text-sm focus:outline-none focus:border-brand-accent resize-none placeholder:text-zinc-700"
               />
               <button 
+                id="btn-generate"
                 onClick={handleGenerate}
                 disabled={isGenerating || !architectInput}
                 className="w-full bg-zinc-100 text-brand-bg py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-white transition-all disabled:opacity-50"
@@ -334,6 +338,7 @@ export default function App() {
             <AnimatePresence>
               {suggestedArch && (
                 <motion.div 
+                  id="architect-result"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="mt-6 p-4 bg-brand-accent/5 border border-brand-accent/20 rounded-xl"
@@ -357,6 +362,7 @@ export default function App() {
                       </pre>
                     </div>
                     <button 
+                      id="btn-copy-code"
                       onClick={() => {
                         navigator.clipboard.writeText(suggestedArch.suggestedCode);
                         alert('Code copied to clipboard!');
@@ -424,6 +430,7 @@ export default function App() {
 
             <div className="flex gap-2">
               <input 
+                id="chat-input"
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleChat()}
@@ -431,6 +438,7 @@ export default function App() {
                 className="flex-1 bg-brand-bg border border-brand-border rounded-xl px-4 py-2 text-xs focus:outline-none focus:border-brand-accent transition-colors"
               />
               <button 
+                id="btn-send-chat"
                 onClick={handleChat}
                 disabled={isChatting || !chatInput.trim()}
                 className="bg-brand-accent text-white p-2.5 rounded-xl hover:bg-brand-accent/80 transition-colors disabled:opacity-50"
@@ -458,6 +466,7 @@ export default function App() {
           <a href="#" className="hover:text-zinc-400">STATUS</a>
         </div>
       </footer>
+      {directorMode && <DirectorMode onClose={() => setDirectorMode(false)} />}
     </div>
   );
 }
