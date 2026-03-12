@@ -260,9 +260,14 @@ export function DirectorMode({ onClose }: { onClose: () => void }) {
 
     const hasStartedRef = useRef(false);
     useEffect(() => {
-        if (hasStartedRef.current) return;
-        hasStartedRef.current = true;
-        startRecordingFlow();
+        document.body.classList.add('hide-cursor');
+        if (!hasStartedRef.current) {
+            hasStartedRef.current = true;
+            startRecordingFlow();
+        }
+        return () => {
+            document.body.classList.remove('hide-cursor');
+        };
     }, []);
 
     return (
