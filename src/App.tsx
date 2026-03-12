@@ -325,7 +325,7 @@ export default function App() {
                 className="w-full bg-zinc-100 text-brand-bg py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-white transition-all disabled:opacity-50"
               >
                 {isGenerating ? (
-                  <div className="w-4 h-4 border-2 border-brand-bg border-t-transparent rounded-full animate-spin"></div>
+                  <div id="architect-loader" className="w-4 h-4 border-2 border-brand-bg border-t-transparent rounded-full animate-spin"></div>
                 ) : (
                   <>
                     <Zap className="w-4 h-4 fill-current" />
@@ -418,7 +418,7 @@ export default function App() {
                  </div>
                ))}
                {isChatting && (
-                 <div className="flex justify-start">
+                 <div id="chat-loader" className="flex justify-start">
                    <div className="bg-brand-surface border border-brand-border p-3 rounded-2xl rounded-tl-sm flex gap-1 items-center">
                      <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce"></span>
                      <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce delay-100"></span>

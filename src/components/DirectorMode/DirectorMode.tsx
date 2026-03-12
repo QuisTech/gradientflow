@@ -10,6 +10,7 @@ type ScriptStep =
   | { type: 'event'; eventType: string; message: string; delay?: number }
   | { type: 'scroll'; targetId?: string; y: number; delay?: number }
   | { type: 'type'; targetId: string; text: string; delay?: number }
+  | { type: 'waitForLoader'; targetId: string; delay?: number }
   | { type: 'wait'; delay: number };
 
 const SCRIPT: ScriptStep[] = [
@@ -37,9 +38,10 @@ const SCRIPT: ScriptStep[] = [
     { type: 'log', text: '[API] POST /api/architect -> DO Agent' },
     { type: 'subtitle', text: 'The Llama 3.1 8B Instruct model parses the constraints in real-time securely through our proxy backend.', delay: 4500 },
    
-    // Wait for generation (approx 5-6s)
-    { type: 'subtitle', text: 'Generating formal JSON schema...', delay: 2500 },
-    { type: 'wait', delay: 3500 },
+    // Wait for generation to finish dynamically
+    { type: 'subtitle', text: 'Generating formal JSON schema... (this may take a few seconds)', delay: 1500 },
+    { type: 'waitForLoader', targetId: 'architect-loader' },
+    { type: 'wait', delay: 1000 },
     { type: 'log', text: '[System] Architecture Payload Received (Schema: Valid JSON)' },
     { type: 'subtitle', text: 'Optimal Architecture Generated! Includes Model parameters, Edge constraints, and training code.', delay: 5000 },
 
@@ -73,8 +75,9 @@ const SCRIPT: ScriptStep[] = [
     { type: 'log', text: '[API] POST /api/chat -> DO RAG Retrieval' },
     { type: 'subtitle', text: 'The DigitalOcean Agent instantly searches the vector space for matching research paragraphs...', delay: 5000 },
     
-    // Chat typically responds in ~5-6 seconds, we wait generously to map length
-    { type: 'wait', delay: 4000 },
+    // Chat typically responds in ~5-6 seconds, we wait dynamically
+    { type: 'waitForLoader', targetId: 'chat-loader' },
+    { type: 'wait', delay: 1000 },
     { type: 'log', text: '[System] Context Matches Found (Vectors: 0.89)' },
     
     { type: 'subtitle', text: 'Incredible. It hallucinates nothing. It directly extracted Vision Transformers, Operators, and Edge constraints from the pure PDF!', delay: 6000 },
@@ -235,6 +238,12 @@ export function DirectorMode({ onClose }: { onClose: () => void }) {
                         el.dispatchEvent(new Event('input', { bubbles: true }));
                         await new Promise(r => setTimeout(r, 40));
                     }
+                }
+            }
+            else if (step.type === 'waitForLoader' && 'targetId' in step && step.targetId) {
+                for (let i = 0; i < 60; i++) {
+                    await new Promise(r => setTimeout(r, 500));
+                    if (!document.getElementById(step.targetId)) break;
                 }
             }
             else if (step.type === 'event') {
