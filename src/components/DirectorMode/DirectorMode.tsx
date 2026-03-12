@@ -59,7 +59,7 @@ const SCRIPT: ScriptStep[] = [
 
     // --- 1:10 - CONSULTANT CHAT & RAG (35s) ---
     { type: 'subtitle', text: 'Step 2: DigitalOcean Consultant RAG Knowledge Base', delay: 4000 },
-    { type: 'scroll', y: 0, targetId: 'window', delay: 1500 },
+    { type: 'scroll', y: 350, targetId: 'window', delay: 1500 },
     { type: 'subtitle', text: 'We linked the Agent to an OpenSearch Knowledge Database holding Drone Vision Research PDFs.', delay: 5000 },
 
     { type: 'cursor', targetId: 'chat-input', delay: 1500 },
