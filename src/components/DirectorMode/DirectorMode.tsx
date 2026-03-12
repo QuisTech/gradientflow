@@ -12,53 +12,77 @@ type ScriptStep =
   | { type: 'wait'; delay: number };
 
 const SCRIPT: ScriptStep[] = [
-    // --- INTRODUCTION ---
-    { type: 'cursor', x: '50%', y: '50%', delay: 1000 },
-    { type: 'subtitle', text: 'Scenario: Designing Edge-AI Computer Vision', delay: 3000 },
-    { type: 'log', text: '[System] GradientFlow Mission Control initialized' },
+    // --- 0:00 - INTRODUCTION (15s) ---
+    { type: 'cursor', x: '50%', y: '50%', delay: 2000 },
+    { type: 'subtitle', text: 'Welcome to GradientFlow Architect. A DigitalOcean AI Mission Control.', delay: 4000 },
+    { type: 'log', text: '[System] Booting GradientFlow Daemon v2.1.0' },
+    { type: 'wait', delay: 1500 },
+    { type: 'log', text: '[Auth] DigitalOcean App Platform Tokens Verified' },
+    { type: 'subtitle', text: 'We translate plain English into production Machine Learning architectures natively using DigitalOcean Agents.', delay: 5000 },
    
-    // --- AI ARCHITECT ---
-    { type: 'subtitle', text: 'Step 1: AI-Powered Architecture Generation', delay: 1000 },
+    // --- 0:15 - AI ARCHITECT PROMPTING (20s) ---
+    { type: 'subtitle', text: 'Step 1. The AI Architect Generator.', delay: 3500 },
     { type: 'cursor', targetId: 'architect-input', delay: 1500 },
-    { type: 'wait', delay: 800 },
-    { type: 'click', targetId: 'architect-input', delay: 500 },
-    { type: 'log', text: '[Input] "I need a real-time object detection model for drones..."' },
+    { type: 'click', targetId: 'architect-input', delay: 1000 },
+    { type: 'log', text: '[Input] Prompting Architect...' },
+    { type: 'event', eventType: 'DataInjection', message: 'Simulating Prompt Input...', delay: 1500 },
+    { type: 'subtitle', text: 'Scenario: We are designing an edge-AI model for autonomous drones running complex vision algorithms.', delay: 5000 },
     
-    { type: 'wait', delay: 500 },
+    { type: 'wait', delay: 1000 },
     { type: 'cursor', targetId: 'btn-generate', delay: 1500 },
     { type: 'wait', delay: 800 },
     { type: 'click', targetId: 'btn-generate', delay: 500 },
-    { type: 'log', text: '[API] POST /api/architect' },
-    { type: 'subtitle', text: 'The DO Agent Llama 3.1 model parses constraints in real-time.', delay: 2000 },
+    { type: 'log', text: '[API] POST /api/architect -> DO Agent' },
+    { type: 'subtitle', text: 'The Llama 3.1 8B Instruct model parses the constraints in real-time securely through our proxy backend.', delay: 4500 },
    
-    // Wait for generation
-    { type: 'wait', delay: 4000 },
-    { type: 'log', text: '[System] Architecture Payload Received (Schema: Valid)' },
-    { type: 'subtitle', text: 'Optimal Architecture: EfficientDet with Transfer Learning', delay: 3000 },
+    // Wait for generation (approx 5-6s)
+    { type: 'subtitle', text: 'Generating formal JSON schema...', delay: 2500 },
+    { type: 'wait', delay: 3500 },
+    { type: 'log', text: '[System] Architecture Payload Received (Schema: Valid JSON)' },
+    { type: 'subtitle', text: 'Optimal Architecture Generated! Includes Model parameters, Edge constraints, and training code.', delay: 5000 },
 
-    // --- COPY CODE ---
-    { type: 'scroll', y: 300, targetId: 'window', delay: 1000 },
+    // --- 0:50 - EXPLORING RESULTS (20s) ---
+    { type: 'scroll', y: 350, targetId: 'window', delay: 2000 },
+    { type: 'subtitle', text: 'The frontend flawlessly unpacks the Neural Network JSON into beautifully rendered code blocks.', delay: 5000 },
+    { type: 'scroll', y: 450, targetId: 'window', delay: 2000 },
+    { type: 'wait', delay: 2000 },
+    { type: 'scroll', y: 550, targetId: 'window', delay: 2000 },
+    { type: 'wait', delay: 2000 },
+
     { type: 'cursor', targetId: 'btn-copy-code', delay: 1500 },
-    { type: 'wait', delay: 800 },
-    { type: 'click', targetId: 'btn-copy-code', delay: 500 },
+    { type: 'click', targetId: 'btn-copy-code', delay: 1000 },
     { type: 'log', text: '[System] Code securely copied to clipboard' },
 
-    // --- CONSULTANT CHAT ---
-    { type: 'subtitle', text: 'Step 3: Consultant RAG Verification', delay: 1000 },
+    // --- 1:10 - CONSULTANT CHAT & RAG (35s) ---
+    { type: 'subtitle', text: 'Step 2: DigitalOcean Consultant RAG Knowledge Base', delay: 4000 },
+    { type: 'scroll', y: 0, targetId: 'window', delay: 1500 },
+    { type: 'subtitle', text: 'We linked the Agent to an OpenSearch Knowledge Database holding Drone Vision Research PDFs.', delay: 5000 },
+
     { type: 'cursor', targetId: 'chat-input', delay: 1500 },
-    { type: 'click', targetId: 'chat-input', delay: 500 },
-    { type: 'log', text: '[Input] Querying RAG Knowledge Base...' },
+    { type: 'click', targetId: 'chat-input', delay: 1000 },
+    { type: 'subtitle', text: 'Let`s query the Agent about specific algorithms mentioned in the uploaded scientific paper.', delay: 5000 },
     
+    { type: 'log', text: '[Input] "Which of these are the documents talking about? What, Who, When, Which and How?"' },
+    { type: 'event', eventType: 'DataInjection', message: 'Simulating Chat...', delay: 1500 },
+
     { type: 'cursor', targetId: 'btn-send-chat', delay: 1500 },
-    { type: 'click', targetId: 'btn-send-chat', delay: 500 },
-    { type: 'subtitle', text: 'The Agent verifies constraints against uploaded PDF Research.', delay: 3000 },
-    { type: 'log', text: '[API] POST /api/chat' },
+    { type: 'click', targetId: 'btn-send-chat', delay: 1000 },
+    { type: 'log', text: '[API] POST /api/chat -> DO RAG Retrieval' },
+    { type: 'subtitle', text: 'The DigitalOcean Agent instantly searches the vector space for matching research paragraphs...', delay: 5000 },
+    
+    // Chat typically responds in ~5-6 seconds, we wait generously to map length
+    { type: 'wait', delay: 4000 },
+    { type: 'log', text: '[System] Context Matches Found (Vectors: 0.89)' },
+    
+    { type: 'subtitle', text: 'Incredible. It hallucinates nothing. It directly extracted Vision Transformers, Operators, and Edge constraints from the pure PDF!', delay: 6000 },
     { type: 'wait', delay: 3000 },
 
-    // --- OUTRO ---
-    { type: 'subtitle', text: 'GradientFlow & DigitalOcean: From Prompt to Production.', delay: 3000 },
-    { type: 'event', eventType: 'Pipeline', message: 'Demo Completed Successfully' },
-    { type: 'cursor', x: '95%', y: '95%', delay: 1000 },
+    // --- 1:55 - OUTRO (15s) ---
+    { type: 'subtitle', text: 'Deployable on App Platform. Accessible anywhere.', delay: 3000 },
+    { type: 'subtitle', text: 'GradientFlow & DigitalOcean: From Prompt to Production. Over and out.', delay: 4000 },
+    { type: 'event', eventType: 'Pipeline', message: 'Mission Complete' },
+    { type: 'cursor', x: '95%', y: '95%', delay: 1500 },
+    { type: 'wait', delay: 2000 }
 ];
 
 export function DirectorMode({ onClose }: { onClose: () => void }) {
