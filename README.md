@@ -7,6 +7,7 @@ GradientFlow Architect is a premium, AI-powered "Mission Control" dashboard that
 - **AI Architect Generator:** Translates plain-English problem descriptions into highly structured, actionable AI architectures (Model Choice, Training Strategy, and Code).
 - **Gradient Consultant Chat (RAG-Enabled):** A persistent, multi-turn chatbot powered by DigitalOcean Agents. Attach custom PDFs to your DO Knowledge Base and chat directly with your documentation!
 - **Mission Control Dashboard:** A sleek, glassmorphism UI built with React, Recharts, and TailwindCSS.
+- **Director Mode:** A built-in, cinematic UI automation engine that records self-driving "hands-free" video demonstrations of the application workflow directly from the browser window.
 - **Secure Architecture:** An integrated Node.js Express backend securely manages DigitalOcean API keys and robustly sanitizes LLM JSON responses.
 
 ## 🛠️ Built With

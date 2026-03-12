@@ -7,7 +7,8 @@ Building reliable Machine Learning pipelines for edge devices (like autonomous d
 **GradientFlow Architect** is an interactive web-based command center powered by DigitalOcean AI.
 
 1. **AI Architect Generator:** Users describe their problem (e.g., "I need a real-time object detection model for a drone"), and the DO Agent instantly generates a formalized JSON schema containing the Optimal Model Choice, Training Strategy, and starter code, which is beautifully unpacked and natively rendered by the React Dashboard.
-2. **Gradient Consultant Chat:** A persistent, multi-turn RAG (Retrieval-Augmented Generation) chatbot hooked directly to DigitalOcean Agents. Users can upload custom PDFs (like PyTorch documentation) directly to their DO Knowledge Base, and the Chatbot fluidly answers highly technical implementation questions using context from those specific research documents.
+2. **Gradient Consultant Chat:** A persistent, multi-turn RAG (Retrieval-Augmented Generation) chatbot hooked directly to DigitalOcean Agents. Users can upload custom PDFs (like PyTorch documentation or Drone Vision Research Papers) directly to their DO Knowledge Base, and the Chatbot fluidly extracts and answers highly technical architecture capabilities (like Vision Transformers or edge-quantization limits) directly from the uploaded research.
+3. **Director Mode Automation:** A highly-polished, cinematic presentation engine built natively into the React app that drives the UI autonomously, types simulated prompts, and generates downloadable `.webm` video recording artifacts of the AI workflow for effortless sharing.
 
 ## How we built it
 
@@ -35,4 +36,4 @@ Our next step is integrating the DigitalOcean Droplet API directly into the inte
 ---
 
 **Built with:**
-React, Vite, Node.js, Express.js, TypeScript, TailwindCSS, Docker, DigitalOcean AI Agents, DigitalOcean App Platform, Llama 3 8B
+React, Vite, Node.js, Express.js, TypeScript, TailwindCSS, Framer Motion, Docker, DigitalOcean AI Agents, DO Knowledge Bases (RAG), DigitalOcean App Platform, Llama 3.1 8B Instruct
