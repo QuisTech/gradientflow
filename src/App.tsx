@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { DirectorMode } from './components/DirectorMode/DirectorMode';
 import { 
   LayoutDashboard, 
@@ -105,6 +105,11 @@ export default function App() {
   const [chatInput, setChatInput] = useState('');
   const [isChatting, setIsChatting] = useState(false);
   const [directorMode, setDirectorMode] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatMessages, isChatting]);
 
   useEffect(() => {
     fetch('/api/jobs')
@@ -426,6 +431,7 @@ export default function App() {
                    </div>
                  </div>
                )}
+               <div ref={chatEndRef} />
             </div>
 
             <div className="flex gap-2">

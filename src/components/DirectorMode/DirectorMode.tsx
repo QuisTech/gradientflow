@@ -65,9 +65,9 @@ const SCRIPT: ScriptStep[] = [
     { type: 'cursor', targetId: 'chat-input', delay: 1500 },
     { type: 'click', targetId: 'chat-input', delay: 1000 },
     { type: 'subtitle', text: 'Let`s query the Agent about specific algorithms mentioned in the uploaded scientific paper.', delay: 2000 },
-    { type: 'type', targetId: 'chat-input', text: 'Which of these are the documents talking about? What, Who, When, Which and How?', delay: 2000 },
+    { type: 'type', targetId: 'chat-input', text: 'What does our uploaded Drone Vision Research PDF recommend for real-time edge processing? Summarize the main points.', delay: 2000 },
     
-    { type: 'log', text: '[Input] "Which of these are the documents talking about? What, Who, When, Which and How?"' },
+    { type: 'log', text: '[Input] Asking Contextual Edge-UAV question' },
     { type: 'event', eventType: 'DataInjection', message: 'Simulating Chat...', delay: 1500 },
 
     { type: 'cursor', targetId: 'btn-send-chat', delay: 1500 },
