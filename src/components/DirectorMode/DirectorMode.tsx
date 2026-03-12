@@ -9,6 +9,7 @@ type ScriptStep =
   | { type: 'log'; text: string; delay?: number }
   | { type: 'event'; eventType: string; message: string; delay?: number }
   | { type: 'scroll'; targetId?: string; y: number; delay?: number }
+  | { type: 'type'; targetId: string; text: string; delay?: number }
   | { type: 'wait'; delay: number };
 
 const SCRIPT: ScriptStep[] = [
@@ -24,6 +25,7 @@ const SCRIPT: ScriptStep[] = [
     { type: 'subtitle', text: 'Step 1. The AI Architect Generator.', delay: 3500 },
     { type: 'cursor', targetId: 'architect-input', delay: 1500 },
     { type: 'click', targetId: 'architect-input', delay: 1000 },
+    { type: 'type', targetId: 'architect-input', text: 'I need a real-time object detection model for autonomous drones running complex vision algorithms on edge GPUs.\n\nPlease specify constraints regarding quantization and transferring learning.', delay: 2000 },
     { type: 'log', text: '[Input] Prompting Architect...' },
     { type: 'event', eventType: 'DataInjection', message: 'Simulating Prompt Input...', delay: 1500 },
     { type: 'subtitle', text: 'Scenario: We are designing an edge-AI model for autonomous drones running complex vision algorithms.', delay: 5000 },
@@ -60,7 +62,8 @@ const SCRIPT: ScriptStep[] = [
 
     { type: 'cursor', targetId: 'chat-input', delay: 1500 },
     { type: 'click', targetId: 'chat-input', delay: 1000 },
-    { type: 'subtitle', text: 'Let`s query the Agent about specific algorithms mentioned in the uploaded scientific paper.', delay: 5000 },
+    { type: 'subtitle', text: 'Let`s query the Agent about specific algorithms mentioned in the uploaded scientific paper.', delay: 2000 },
+    { type: 'type', targetId: 'chat-input', text: 'Which of these are the documents talking about? What, Who, When, Which and How?', delay: 2000 },
     
     { type: 'log', text: '[Input] "Which of these are the documents talking about? What, Who, When, Which and How?"' },
     { type: 'event', eventType: 'DataInjection', message: 'Simulating Chat...', delay: 1500 },
@@ -218,6 +221,20 @@ export function DirectorMode({ onClose }: { onClose: () => void }) {
                 } else if (step.targetId) {
                     const el = document.getElementById(step.targetId);
                     if (el) el.scrollTo({ top: step.y, behavior: 'smooth' });
+                }
+            }
+            else if (step.type === 'type' && 'targetId' in step && step.targetId) {
+                const el = document.getElementById(step.targetId);
+                if (el instanceof HTMLTextAreaElement || el instanceof HTMLInputElement) {
+                    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+                        el instanceof HTMLTextAreaElement ? window.HTMLTextAreaElement.prototype : window.HTMLInputElement.prototype, 
+                        'value'
+                    )?.set;
+                    for (let i = 0; i <= (step as any).text.length; i++) {
+                        nativeInputValueSetter?.call(el, (step as any).text.substring(0, i));
+                        el.dispatchEvent(new Event('input', { bubbles: true }));
+                        await new Promise(r => setTimeout(r, 40));
+                    }
                 }
             }
             else if (step.type === 'event') {
