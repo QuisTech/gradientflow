@@ -59,3 +59,7 @@ GradientFlow is Docker-ready and natively configured for the **DigitalOcean App 
 3. Select your repository. App Platform will automatically detect the `Dockerfile`.
 4. Inject your `DO_AGENT_ENDPOINT` and `DO_AGENT_KEY` as Environment Variables.
 5. Deploy!
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
